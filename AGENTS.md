@@ -716,3 +716,327 @@
 }
 ```
 
+# iVibe Platform – Comprehensive Technical Architecture and Data‑Flow Documentation
+
+*Version 1.0 – August 4 2025*
+
+---
+
+## 1. High‑Level Overview
+
+iVibe is a distributed telemetry and analytics system that captures developer activity, multi‑modal user context, and AI usage, then stores and surfaces that information through a unified Grafana dashboard. The platform is fully self‑hosted, privacy‑respecting by design, and monetised via Stripe‑backed subscription tiers. The solution comprises four logical planes:
+
+1. **Capture Plane** – local agents that detect events on desktop, mobile, and browser environments.
+2. **Transport Plane** – secure message exchange, primarily via gRPC over TLS and supplemental local REST endpoints when required.
+3. **Processing Plane** – ingestion services, streaming ETL, vectorisation, and summarisation jobs running inside Docker Compose or Kubernetes.
+4. **Presentation & Control Plane** – authenticated APIs, Grafana dashboards, public profile service, and Stripe billing portal.
+
+All planes communicate inside the user’s network boundary, with optional outbound calls to LLM vendors proxied through Helicone for trace logging and cost aggregation.
+
+---
+
+## 2. Component Catalog
+
+| Category     | Service                    | Technology                                 | Purpose                                                  |
+| ------------ | -------------------------- | ------------------------------------------ | -------------------------------------------------------- |
+| Capture      | **aw‑watcher‑window**      | Rust + DBus                                | Window focus events on Linux, Windows, macOS             |
+| Capture      | **aw‑watcher‑kdevelop**    | Rust plugin for KTextEditor                | Emits file open, save, compile, debug events             |
+| Capture      | **aw‑watcher‑browser**     | TypeScript MV3 extension                   | URL, tab focus, scroll events, research tagging          |
+| Capture      | **aw‑watcher‑terminal**    | Go daemon                                  | Captures shell commands, exit codes, stderr buckets      |
+| Capture      | **aw‑watcher‑mobile**      | Kotlin service                             | Android foreground app, GPS, mic hot‑word buffer         |
+| Transport    | **Event Gateway**          | Envoy + gRPC                               | Authenticates and routes incoming event streams          |
+| Processing   | **aw‑server‑rust**         | Rust                                       | Writes raw JSON events into Postgres                     |
+| Processing   | **Vectoriser**             | Python 3.12 + sentence‑transformers        | Converts text spans to 1536‑dimensional pgvector columns |
+| Processing   | **Summariser Job**         | Python + llama‑cpp or Helicone proxied LLM | Generates natural language digests                       |
+| Processing   | **ETL Orchestrator**       | Apache Airflow                             | Daily materialised views, roll‑ups, compliance exports   |
+| Storage      | **Postgres 16**            | TimescaleDB, pgvector                      | Primary relational and vector store                      |
+| Storage      | **MinIO**                  | S3 compatible                              | Binary object storage for audio opus, screenshots        |
+| AI Proxy     | **Helicone**               | Go                                         | Observes and logs OpenAI or Anthropic calls              |
+| Presentation | **Grafana OSS 11**         | Data source: Postgres                      | Dashboards, alerting, share links                        |
+| Presentation | **Public Profile API**     | FastAPI                                    | Serves controlled public JSON and HTML views             |
+| Billing      | **Stripe Webhook Handler** | Flask                                      | Seat tracking, tier enforcement                          |
+| Identity     | **Keycloak**               | OIDC                                       | SSO for all web UIs and gateway mutual‑TLS certs         |
+
+---
+
+## 3. Detailed Data Life‑Cycle
+
+### 3.1 Event Emission
+
+1. Each watcher process creates an in‑memory event queue with back‑pressure. Events conform to **Capture Event Schema v0.9**:
+   ```json
+   {
+     "event_id": "uuid4",
+     "user_id": "uuid4",
+     "timestamp": "RFC3339",
+     "source": "terminal" | "browser" | "kdevelop" | "mobile",
+     "project": "string",
+     "language": "rust" | "python" | ...,
+     "payload": { /* source specific */ }
+   }
+   ```
+2. A unary‑stream gRPC call `PushEvents` sends batches of up to 512 events or every five seconds, whichever comes first. TLS certificates are issued by the local Keycloak CA.
+
+### 3.2 Gateway Routing
+
+- Envoy terminates TLS, validates the OAuth2 token included in the `authorization` header, then passes the request upstream to *aw‑server‑rust*.
+- The gateway attaches a `tenant_id` header derived from the JWT claims, enforcing multi‑tenant segregation in Postgres row‑level security.
+
+### 3.3 Raw Storage
+
+- *aw‑server‑rust* writes events into \`\` partitioned by month and hashed by `user_id`.
+- Audio buffers are stored in MinIO, with the object URL inserted into the event payload. Only a hash and opus codec metadata are stored in Postgres to keep the table lean.
+
+### 3.4 Stream Processing
+
+- A Debezium connector streams Postgres WAL to Kafka, enabling near real‑time fan‑out without heavy triggers.
+- The **Vectoriser** consumer listens on the `events_raw` topic, extracts any text (URL titles, transcribed sentences, prompt‑response pairs), then computes embeddings via:
+  - Local llama‑cpp model for offline mode, or
+  - OpenAI `text-embedding-3-small` through Helicone with `X-Project-ID` header for traceability.
+- Embeddings are saved into \`\` using pgvector.
+
+### 3.5 Summarisation and Aggregates
+
+- Airflow DAG `daily_rollup` executes nightly cron UTC 04:00:
+  1. Creates or refreshes **materialised views**:
+     - `mv_time_by_language`
+     - `mv_errors_fixed`
+     - `mv_token_usage`
+  2. Runs **Summariser Job** which:
+     - Pulls the last 24h of events per project.
+     - Generates a markdown digest via local model unless the user’s tier is Pro or above, in which case the job can proxy to GPT‑4o for higher quality.
+     - Inserts result into \`\`.
+
+### 3.6 Presentation Layer
+
+- Grafana dashboards query the materialised views directly. Panels use Transformations so no extra APIs are required.
+- Public profile endpoint `/u/{handle}` fetches summaries and selected metrics, applies privacy filter bitmask, then renders via Jinja templates.
+
+---
+
+## 4. Inter‑Service Interfaces
+
+| Producer → Consumer         | Protocol                              | Payload Contract             |
+| --------------------------- | ------------------------------------- | ---------------------------- |
+| Watcher → Event Gateway     | gRPC, proto `capture.proto`           | Stream `EventBatch`          |
+| Gateway → aw‑server‑rust    | gRPC                                  | Same `capture.proto`         |
+| Helicone → Postgres         | ClickHouse or Postgres ‑ user chooses | `helicone.request` table     |
+| Postgres → Kafka (Debezium) | JDBC logical replication              | Debezium envelope JSON       |
+| Kafka → Vectoriser          | Kafka Consumer API                    | `events_raw` topic           |
+| Vectoriser → Postgres       | psycopg binary protocol               | `INSERT ... ON CONFLICT`     |
+| Airflow → LLM               | HTTP 1.1 through Helicone             | OpenAI Chat Completions JSON |
+| Stripe → Webhook Handler    | HTTPS POST                            | Stripe `event` JSON          |
+| Keycloak → All              | OIDC JWT                              | Bearer header                |
+
+---
+
+## 5. Subscription Enforcement Logic
+
+1. **On session initiation** a middleware queries `users.tier` and sets request context variables `retention_days`, `integration_limit`, `leaderboard_size`.
+2. **Dashboard queries** include `WHERE ts >= now() - interval '{retention_days} days'` to enforce history limits.
+3. **Gatekeeping decorators** on integration endpoints validate the user’s tier before issuing OAuth flows.
+4. Seats for Team and Business tiers are counted weekly using the `distinct user_id where active_since > now() - '7 days'::interval` metric and reconciled back to Stripe with `usage_record_summaries`.
+
+---
+
+## 6. Security Controls
+
+- **Row‑level security** in Postgres using `app_current_user()`.
+- **Mutual TLS** between all microservices within the internal network.
+- **Auditable consent logs** persisted in `user_agreements` table with hash of agreement text, timestamp, IP address.
+- **Audio recovery** requires admin role plus dual‑control approval recorded in `audio_access_log`.
+
+---
+
+## 7. Extensibility and SDK
+
+Developers can build integrations with the **iVibe SDK**:
+
+- Language bindings: Python, Node.js, Go.
+- Function `ivibe.capture.customEvent(name, payload, tags)` sends bespoke events over WebSocket that maps to the standard schema.
+- Outbound Webhook subscription lets external SaaS consume summaries or real‑time events.
+
+---
+
+## 8. Deployment Topology – Docker Compose
+
+```mermaid
+flowchart LR
+  subgraph LAN
+    A[Watchers] -->|gRPC| G(Event Gateway)
+    G --> R(aw‑server‑rust)
+    R --> P(Postgres)
+    R --> M(MinIO)
+    P --> K[Kafka+Debezium]
+    K --> V(Vectoriser)
+    K --> S(Summariser)
+    V --> P
+    S --> P
+    H(Helicone) -->|metrics| P
+    P --> Gra[Grafana]
+    Stripe((Stripe)) --> W(Webhook)
+    W --> P
+  end
+```
+
+---
+
+## 9. Sequence Diagram – AI Request Trace
+
+```mermaid
+sequenceDiagram
+  participant IDE as KDevelop
+  participant Watcher as aw‑watcher‑kdevelop
+  participant Hel as Helicone
+  participant OpenAI
+  IDE->>Watcher: user prompts AI helper
+  Watcher->>Hel: POST /v1/chat/completions (proxied)
+  Hel-->>OpenAI: same payload + trace headers
+  OpenAI-->>Hel: JSON response
+  Hel-->>Watcher: JSON response + Hel‑Trace‑ID
+  Watcher->>aw‑server‑rust: Event {tokens_in, tokens_out, trace_id}
+  aw‑server‑rust->>Postgres: INSERT events_raw
+  Postgres-->>Grafana: available for dashboards
+```
+
+---
+
+## 10. Data Retention Matrix
+
+| Tier     | Raw Events           | Summaries | Audio Objects | Vector Embeddings |
+| -------- | -------------------- | --------- | ------------- | ----------------- |
+| Free     | 7 days               | 90 days   | 30 days       | 90 days           |
+| Basic    | 14 days              | 180 days  | 90 days       | 180 days          |
+| Pro      | Infinite             | Infinite  | 365 days      | Infinite          |
+| Team     | 365 days, extendable | Infinite  | Configurable  | Infinite          |
+| Business | Policy driven        | Infinite  | Configurable  | Infinite          |
+
+---
+
+## 11. Future Enhancements
+
+1. **Edge model** deployment to Android for offline summarisation.
+2. **Federated analytics** for cross‑company benchmarking while keeping raw data siloed.
+3. **WebAssembly plug‑in sandbox** in Grafana panels for custom visualisations.
+
+---
+
+### End of Document
+
+# iVibe Platform – End‑to‑End Build Plan
+
+**Domain:** iVibe.live  
+**Primary Goal:** Local, privacy‑focused activity analytics and AI context engine that rivals WakaTime, adds multi‑modal tracking, and offers paid tiers through Stripe.
+
+---
+## 0. Foundational Decisions
+1. **Programming language** – Python 3.12 for server + Go helper daemons when low‑latency capture matters.
+2. **Core stack** – ActivityWatch fork (aw‑server‑rust ➜ Postgres + pgvector) + Helicone proxy + Grafana OSS + FastAPI or Flask façade API.
+3. **Cross‑platform capture** – Desktop watchers (Linux, Windows, macOS), Android service, browser extension (Manifest V3, TypeScript). KDevelop plugin built on KTextEditor APIs.
+4. **LLM context** – Optional local model via llama‑cpp plus remote proxy to OpenAI or Claude through Helicone.
+
+---
+## 1. Data Capture Modules (Milestone M1)
+| Module | Scope | Key Tasks |
+| --- | --- | --- |
+| **aw‑watcher‑window+editor** | Window titles, file paths, branch, language | Fork upstream, add KDevelop events using DBus signals, emit JSON ➜ gRPC |
+| **aw‑watcher‑browser** | URLs, tab focus time | Build Chrome + Firefox + Brave extension, stream to localhost collector |
+| **aw‑watcher‑terminal** | Bash, Zsh, Fish, PowerShell commands + stderr | Enhance with error parsing, tag fixed vs unresolved |
+| **aw‑watcher‑mobile** | Android foreground app, GPS, mic hot‑word, token usage | Kotlin service, edge STT, store raw opus, vectorize on device |
+| **Helicone bridge** | Prompt, response, token count per provider | Tag events with `project_id`, `user_id` |
+
+---
+## 2. Storage & Processing (M2)
+1. **Postgres 16** – schemas:
+   * `events_raw` (jsonb)
+   * `embeddings` (vector)
+   * `summaries` (text, vector)
+2. **TimescaleDB** extension for time‑series rollups.
+3. **pgvector** for similarity search.
+4. Hourly ETL job ➜ aggregate per project, language, error type, AI model.
+5. Daily LLM summarizer ➜ writes digest to `summaries`.
+
+---
+## 3. Dashboards & Reports (M3)
+* **Grafana**
+  * Shared vs private folders with access control.
+  * Panels: "Coding time by language", "Errors fixed vs introduced", "AI tokens per day".
+* **Export options** – CSV, JSON, SVG snapshots.
+* Public profile endpoint `https://iVibe.live/u/<handle>` obeys privacy flags.
+
+---
+## 4. Subscription & Billing (M4)
+### 4.1 Tier Matrix
+| Tier | Monthly | Yearly | Features |
+| --- | --- | --- | --- |
+| **Free** | $0 | $0 | 1‑week history, weekly email report, 1 goal, public leaderboard |
+| **Basic** | $5 | $48 | 2‑week history, daily+weekly emails, 3 goals, private leaderboard ≤5 devs, basic integrations, priority email support |
+| **Pro** | $10 | $96 | Unlimited history, unlimited goals, private leaderboards ≤50 devs, invoices, premium commit & PR stats, all integrations, export, priority chat support, mobile audio + location tracker |
+| **Team** | $17 per dev | $180 per dev | Up to 100 devs, unlimited team dashboards, team commit & PR stats, team integrations, private leaderboards ≤100, export, custom privacy rules |
+| **Business** | $20 per dev | $216 per dev | 100‑1,000 devs, onboarding training, stats for 1k devs, leaderboards ≤1k, priority Zoom support, custom integrations, SSO |
+
+### 4.2 Stripe Implementation
+1. **Products & Prices** – Create five products (Free is metered at $0). Attach recurring prices (monthly, yearly) with per‑seat quantity for Team/Business.
+2. **Checkout** – Stripe hosted checkout with `client_reference_id = user_id` and `subscription_data[metadata][tier]`.
+3. **Webhook handler** – `/stripe/webhook` in Flask to:
+   * update `users.tier`, `users.subscription_id`, `seats`.
+   * provision role limits (e.g., dashboard retention).
+4. **Billing portal** – Enable Stripe Customer Portal for upgrades, payment methods, invoices.
+5. **Usage reconciliation** – Cron job counts active dev seats ➜ `stripe.SubscriptionItem.create_usage_record`.
+
+---
+## 5. Privacy, Consent & Telemetry (M5)
+1. On first launch display EULA + Privacy Notice. Auto‑enable all capture, user may toggle display, yet system still stores for internal marketing.
+2. Per‑location mute – geo‑fence table with radius meters.
+3. Audio stored as vector only, decode path behind admin role.
+
+---
+## 6. Integrations Marketplace (M6)
+* Ship CLI scaffolder `ivibe integration init` – generates REST + Webhook template.
+* Built‑in integrations list mirrors WakaTime, plus:
+  * Slack, Discord, GitHub, GitLab, Bitbucket, Jira
+  * Google & Microsoft Calendars, Zoom
+  * Custom Webhook out
+* Each integration registered in `integrations` table with OAuth creds.
+
+---
+## 7. Cross‑Platform Clients (M7)
+1. **Desktop GUI** – Electron wrapper for settings, stats snapshot.
+2. **Android app** – Kotlin + Jetpack Compose, background service, microphone, GPS.
+3. **CLI** – `ivb` command for Linux/BSD macOS Windows.
+4. **KDevelop plugin** – expose via KTextEditor plugin framework.
+
+---
+## 8. Deployment & DevOps (M8)
+| Stage | Tooling |
+| --- | --- |
+| CI | GitLab CI, runners on Arch Linux to respect user’s stack |
+| Containers | Docker Compose for local dev, optional k8s helm chart |
+| Secrets | HashiCorp Vault dev profile |
+| Observability | Loki for logs, Prometheus for metrics |
+
+---
+## 9. Roadmap Summary
+1. **M1 – Capture Core** (4 weeks)
+2. **M2 – Storage & ETL** (2 weeks)
+3. **M3 – Dashboards MVP** (2 weeks)
+4. **M4 – Stripe Billing** (1 week)
+5. **M5 – Privacy & Consent** (1 week)
+6. **M6 – Integrations SDK** (3 weeks)
+7. **M7 – Mobile & Plugins** (4 weeks)
+8. **M8 – Production Hardening** (2 weeks)
+
+Total ≈ 19 weeks to GA.
+
+---
+## 10. Immediate TODO (Next Sprint)
+- [ ] Fork ActivityWatch, start KDevelop watcher proof‑of‑concept.
+- [ ] Draft Postgres schema in `schemas/ivibe.sql`.
+- [ ] Create Stripe test products and webhook endpoint skeleton.
+- [ ] Spin up Grafana container, connect to Postgres, import starter boards.
+- [ ] Define JSON contract for audio vectors.
+- [ ] Draft EULA + Privacy language.
+
+---
+*Created 2025‑08‑04 by ChatGPT – working document for Tim Spurlin.*
+
