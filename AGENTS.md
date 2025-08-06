@@ -1028,15 +1028,3 @@ sequenceDiagram
 
 Total ≈ 19 weeks to GA.
 
----
-## 10. Immediate TODO (Next Sprint)
-- [ ] Fork ActivityWatch, start KDevelop watcher proof‑of‑concept.
-- [ ] Draft Postgres schema in `schemas/ivibe.sql`.
-- [ ] Create Stripe test products and webhook endpoint skeleton.
-- [ ] Spin up Grafana container, connect to Postgres, import starter boards.
-- [ ] Define JSON contract for audio vectors.
-- [ ] Draft EULA + Privacy language.
-
----
-*Created 2025‑08‑04 by ChatGPT – working document for Tim Spurlin.*
-
