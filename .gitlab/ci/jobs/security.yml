@@ -1,0 +1,2 @@
+security:
+  script: echo security

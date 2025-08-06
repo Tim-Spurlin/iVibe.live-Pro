@@ -1,0 +1,22 @@
+[workspace]
+members = [
+    "watchers/aw-watcher-window",
+    "watchers/aw-watcher-kdevelop",
+    "watchers/aw-watcher-terminal",
+    "watchers/aw-watcher-audio",
+    "services/event-gateway",
+    "services/aw-server-rust",
+    "services/vectorizer-service",
+    "services/summarizer-job",
+    "services/etl-orchestrator",
+    "services/public-profile-api",
+    "services/stripe-webhook-handler",
+    "intelligence/emotion-detection",
+    "intelligence/vibe-social-engine",
+    "api/rest-api",
+    "api/graphql-api",
+    "cli",
+    "shared/proto",
+    "shared/models",
+    "shared/utils"
+]

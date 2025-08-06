@@ -1,0 +1,5 @@
+include:
+  - local: 'jobs/test.yml'
+  - local: 'jobs/build.yml'
+  - local: 'jobs/deploy.yml'
+  - local: 'jobs/security.yml'
