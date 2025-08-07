@@ -1,0 +1,21 @@
+# REST API Agent Instructions
+
+- **Criticality:** 10/10
+- **Purpose:** RESTful API server
+- **Framework:** Actix-web
+- **Files:**
+  - `src/main.rs`
+  - `src/routes/events.rs`
+  - `src/routes/dashboard.rs`
+  - `src/routes/vibe.rs`
+  - `src/routes/export.rs`
+  - `src/routes/integrations.rs`
+  - `src/middleware/auth.rs`
+  - `src/middleware/tier.rs`
+- **Endpoints:**
+  - `/api/events`
+  - `/api/dashboard`
+  - `/api/vibe/nearby`
+  - `/api/export`
+- **Caching:** 60-second dashboard cache
+- **Export formats:** CSV, JSON, PDF
