@@ -1,0 +1,7 @@
+- **Criticality:** 8/10
+- **Purpose:** Audio capture and privacy-preserving vectorization
+- **Files:** src/main.rs, src/capture.rs, src/hotword.rs, src/vectorizer.rs, src/privacy.rs
+- **Triggers:** Hot-word detection, context changes, manual activation
+- **Privacy:** Audio converted to embeddings on-device, raw audio discarded
+- **Storage:** Only embeddings stored in PostgreSQL pgvector
+- **Audio format:** 16kHz mono for efficient processing
