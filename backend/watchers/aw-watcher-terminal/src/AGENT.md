@@ -1,0 +1,7 @@
+- Criticality: 10/10
+- Purpose: Capture terminal commands and error intelligence for ActivityWatch
+- Shell hook installation: `shell/*.rs` inject hooks into Bash, Zsh, Fish, and PowerShell profiles
+- Command interception: DEBUG/ERR traps record each command, working directory, and exit status before execution
+- Stderr capture & classification: watcher streams stderr, tagging output as error, warning, or info
+- Error fix detection: pattern matching spots reruns that resolve previous failures
+- Event transmission: structured events (`source: terminal`, command, stderr, classification, fix_detected) sent to the Event Gateway
