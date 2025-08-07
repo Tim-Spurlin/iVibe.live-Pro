@@ -46,3 +46,14 @@ This directory coordinates the full iVibe.live telemetry and analytics stack. It
 
 ## Environment
 All processes read secrets from `.env`. Ensure `DATABASE_URL`, `OPENAI_API_KEY`, `STRIPE_KEY`, and `JWT_SECRET` are set before invoking any targets.
+# Codex PR policy
+
+When tasks finish with passing tests or a clean linter status, open a GitHub Pull Request to `main`.
+
+Branch naming, `codex/{yyyy-mm-dd}/{slug}`
+PR title, `codex, {short imperative summary}`
+PR body, include, what changed, why, test output summary, links to related issues
+Labels, `codex`, `automation`
+Reviewers, @Tim-Spurlin
+
+If tests fail, do not open a PR, include the failing logs in the task output instead.
