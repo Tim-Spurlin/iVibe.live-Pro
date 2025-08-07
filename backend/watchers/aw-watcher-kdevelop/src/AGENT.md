@@ -1,0 +1,8 @@
+- Criticality: 10/10
+- Scope: Implementation files for the KDevelop watcher.
+- Responsibilities:
+  - Register the watcher as a KDevelop/KTextEditor plugin.
+  - Monitor KTextEditor DBus signals for file open, save, compile and debug events.
+  - Extract project, branch and language metadata for each captured event.
+  - Stream structured events to the ActivityWatch event gateway.
+  - Ensure emitted records conform to the platform EventSchema (event_id, user_id, timestamp, source=`"kdevelop"`, project, language, payload).
