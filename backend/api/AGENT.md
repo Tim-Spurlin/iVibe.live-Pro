@@ -1,0 +1,11 @@
+- **Criticality**: 10/10
+- **Purpose**: External API interfaces
+- **Subdirectories**:
+  - `rest-api` (criticality: 10)
+  - `graphql-api` (criticality: 9)
+- **Protocols**:
+  - REST on port 8080
+  - GraphQL on port 8082
+- **Authentication**: JWT via Keycloak
+- **Rate limiting**: Per-tier quotas
+- **Middleware**: CORS, compression, auth, tier enforcement
