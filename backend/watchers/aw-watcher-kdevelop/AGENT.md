@@ -1,0 +1,7 @@
+- Criticality: 10/10
+- Purpose: KDevelop IDE integration for developer activity tracking
+- Files: src/main.rs, src/plugin.rs (KTextEditor integration), src/dbus.rs (DBus communication), src/events.rs
+- Monitors: File open/save, compile events, debug sessions, project switches
+- Communication: KTextEditor API → DBus → Rust watcher → Event Gateway
+- Event data: Project name, branch, language, file path, compilation status
+- Integration: Built on KTextEditor plugin framework
