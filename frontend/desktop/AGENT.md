@@ -1,0 +1,9 @@
+- **Criticality**: 9/10
+- **Purpose**: Desktop application using Tauri
+- **Files**:
+  - `src-tauri/` (Rust backend)
+  - `src/` (React frontend)
+  - `tauri.conf.json`
+- **Framework**: Tauri for native performance
+- **Features**: System tray, settings, dashboard snapshot
+- **Platform builds**: Windows MSI, macOS DMG, Linux DEB/RPM
