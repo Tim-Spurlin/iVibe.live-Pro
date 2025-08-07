@@ -1,0 +1,13 @@
+- Criticality: 9/10
+- Purpose: Facial emotion classification
+- Files:
+  - src/main.rs
+  - src/classifier.rs
+  - src/context.rs
+  - src/camera/capture.rs
+  - src/camera/platform.rs
+  - src/wasm/model.rs
+- Model: TensorFlow Lite compiled to WASM
+- Emotions: smile, laugh, cry, fear, anger
+- Context capture: Screenshot, active app, location, nearby vibers
+- Privacy: On-device processing only
