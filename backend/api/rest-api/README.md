@@ -40,13 +40,15 @@ curl "http://localhost:8000/api/vibe/nearby?lat=51.5&lng=-0.1"
 curl -X POST "http://localhost:8000/api/export?format=csv"
 ```
 
-## Tier-Based Feature Availability
+## Universal Feature Availability
 
-| Endpoint | Free | Pro | Business |
-|----------|:----:|:---:|:--------:|
-| `/api/events` | ✅ | ✅ | ✅ |
-| `/api/dashboard` | ✅ | ✅ | ✅ |
-| `/api/vibe/nearby` | ✅ | ✅ | ✅ |
-| `/api/export` | ❌ | CSV & JSON | CSV, JSON & PDF |
+**All endpoints are available to every authenticated user without restrictions.**
 
-`/api/export` is available only to paid tiers. The Business tier additionally enables PDF export.
+| Endpoint | Description | Access Level |
+|----------|-------------|---------------|
+| `/api/events` | List recent events | All Users |
+| `/api/dashboard` | Retrieve dashboard metrics (cached for 60 seconds) | All Users |
+| `/api/vibe/nearby` | Fetch nearby vibe scores | All Users |
+| `/api/export` | Export activity data in CSV, JSON, PDF formats | All Users |
+
+All features are universally accessible. Authentication is required only for security purposes, not to restrict functionality.

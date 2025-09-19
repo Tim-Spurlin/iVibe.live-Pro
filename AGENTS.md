@@ -188,20 +188,20 @@
           "Fetch last 24h events per project from Postgres",
           "Send content to OpenAI Chat Completions API (GPT‑4o) via Helicone, retrieving structured summaries and cost details",
           "Store summarised markdown and embeddings in Postgres",
-          "Run with tier checks: only for Pro or above tiers send to remote models; otherwise summarise locally",
+          "Run summarization using OpenAI GPT-4o for all users",
           "Schedule via Cron (04:00 UTC)"
         ]
       },
       {
         "Name": "ETLOrchestrator",
         "Language": "Rust",
-        "Purpose": "Aggregate raw events into materialised views and roll‑ups for Grafana dashboards. Enforce tier‑specific retention periods and generate compliance exports.",
+        "Purpose": "Aggregate raw events into materialised views and roll‑ups for Grafana dashboards. Generate compliance exports.",
         "KeyTasks": [
           "Create materialised views such as `mv_time_by_language`, `mv_errors_fixed`, `mv_token_usage`, `mv_emotions`, `mv_vibe_scores`",
           "Refresh views hourly or daily depending on use‑case",
-          "Delete raw data older than the tier’s retention policy",
+          "Maintain unlimited data retention for all users",
           "Generate exports (CSV, JSON, PDF) and invoices from time data",
-          "Send usage metrics to Stripe for per‑seat reconciliation"
+          "Generate exports (CSV, JSON, PDF) for users"
         ]
       },
       {
@@ -216,16 +216,15 @@
         ]
       },
       {
-        "Name": "StripeWebhookHandler",
+        "Name": "DonationHandler",
         "Language": "Rust (Actix Web)",
-        "Purpose": "Process Stripe events to update subscription tiers, seat counts, and billing status. Enforce subscription limits in middleware.",
+        "Purpose": "Process community donations and funding events. Handle donor acknowledgments and community support features.",
         "KeyTasks": [
-          "Verify webhook signatures",
-          "Parse subscription.created, subscription.updated, invoice.paid events",
-          "Update `users.tier`, `users.subscription_id`, `users.seats`",
-          "Adjust retention_days, integration_limits, leaderboard sizes accordingly",
-          "Handle automatic usage reconciliation for Team/Business per seat",
-          "Allow portal access for upgrades and payment methods"
+          "Verify donation signatures",
+          "Process donation events and acknowledgments",
+          "Update community supporter status",
+          "Handle donation portal access for community funding",
+          "Manage community contribution tracking"
         ]
       },
       {
@@ -453,83 +452,43 @@
       }
     }
   ],
-  "SubscriptionPlans": [
-    {
-      "PlanName": "Free",
-      "MonthlyPrice": 0.0,
-      "AnnualPricePerMonth": 0.0,
-      "DashboardHistory": "1 week",
-      "EmailReports": ["Weekly"],
-      "ProgrammingGoals": 1,
-      "Leaderboard": {"Type": "Public", "Limit": "Unlimited"},
-      "Integrations": "Basic (core IDE plugins and minimal external services)",
-      "ExportData": false,
-      "MobileFeatures": false,
-      "AudioFeatures": false,
-      "Support": "Community forum",
-      "FeaturesIncluded": ["Comprehensive Activity Tracking", "Terminal Intelligence", "Browser Monitoring", "Vibe Social System", "Advanced Analytics", "Privacy and Security Controls", "Cross‑Platform Client Support"]
-    },
-    {
-      "PlanName": "Essential",
-      "MonthlyPrice": 4.5,
-      "AnnualPricePerMonth": 4.0,
-      "DashboardHistory": "2 weeks",
-      "EmailReports": ["Daily", "Weekly"],
-      "ProgrammingGoals": 3,
-      "Leaderboard": {"Type": "Private", "Limit": 5},
-      "Integrations": "Essential integrations (GitHub, GitLab, Bitbucket, Slack, basic calendars)",
-      "ExportData": false,
-      "MobileFeatures": false,
-      "AudioFeatures": false,
-      "Support": "Email",
-      "FeaturesIncluded": ["Comprehensive Activity Tracking", "Terminal Intelligence", "Browser Monitoring", "Vibe Social System", "AI Integration and Token Tracking", "Advanced Analytics", "Reporting and Exports (limited reports)", "Privacy and Security Controls", "Cross‑Platform Client Support"]
-    },
-    {
-      "PlanName": "Elite",
-      "MonthlyPrice": 10.0,
-      "AnnualPricePerMonth": 8.0,
-      "DashboardHistory": "Unlimited",
-      "EmailReports": ["Daily", "Weekly", "Monthly"],
-      "ProgrammingGoals": "Unlimited",
-      "Leaderboard": {"Type": "Private", "Limit": 50},
-      "Integrations": "All integrations (IDE plugins, communication, project management, calendars, custom)",
-      "ExportData": true,
-      "MobileFeatures": true,
-      "AudioFeatures": true,
-      "Support": "Priority chat support",
-      "FeaturesIncluded": ["Comprehensive Activity Tracking", "Terminal Intelligence", "Browser Monitoring", "Mobile Tracking Suite", "Emotion Analytics", "Vibe Social System", "AI Integration and Token Tracking", "Location Intelligence", "Advanced Analytics", "Reporting and Exports", "Integrations Marketplace with custom SDK", "Privacy and Security Controls", "Cross‑Platform Client Support"]
-    },
-    {
-      "PlanName": "Team",
-      "MonthlyPrice": 15.5,
-      "AnnualPricePerMonth": 13.5,
-      "DashboardHistory": "365 days",
-      "EmailReports": ["Daily", "Weekly", "Monthly"],
-      "ProgrammingGoals": "Unlimited",
-      "Leaderboard": {"Type": "Private", "Limit": 100},
-      "Integrations": "All integrations plus team dashboards and team token reporting",
-      "ExportData": true,
-      "MobileFeatures": true,
-      "AudioFeatures": true,
-      "Support": "Priority support",
-      "FeaturesIncluded": ["Comprehensive Activity Tracking", "Terminal Intelligence", "Browser Monitoring", "Mobile Tracking Suite", "Emotion Analytics", "Vibe Social System", "AI Integration and Token Tracking", "Location Intelligence", "Advanced Analytics", "Reporting and Exports", "Integrations Marketplace with SDK", "Privacy and Security Controls", "Cross‑Platform Client Support", "Team Dashboards and Metrics"]
-    },
-    {
-      "PlanName": "Business",
-      "MonthlyPrice": 18.25,
-      "AnnualPricePerMonth": 16.25,
-      "DashboardHistory": "Unlimited",
-      "EmailReports": ["Daily", "Weekly", "Monthly"],
-      "ProgrammingGoals": "Unlimited",
-      "Leaderboard": {"Type": "Private", "Limit": 1000},
-      "Integrations": "Custom and enterprise integrations with SSO and advanced privacy settings",
-      "ExportData": true,
-      "MobileFeatures": true,
-      "AudioFeatures": true,
-      "Support": "Zoom and phone support with dedicated manager",
-      "FeaturesIncluded": ["Comprehensive Activity Tracking", "Terminal Intelligence", "Browser Monitoring", "Mobile Tracking Suite", "Emotion Analytics", "Vibe Social System", "AI Integration and Token Tracking", "Location Intelligence", "Advanced Analytics", "Reporting and Exports", "Integrations Marketplace with SDK", "Privacy and Security Controls", "Cross‑Platform Client Support", "Team Dashboards and Metrics", "Enterprise Onboarding", "Legal & Compliance Tools", "SSO and Custom Integrations"]
-    }
-  ],
+  "UniversalAccessPolicy": {
+    "Model": "Completely Free",
+    "AccessLevel": "Universal",
+    "DashboardHistory": "Unlimited",
+    "EmailReports": ["Daily", "Weekly", "Monthly"],
+    "ProgrammingGoals": "Unlimited",
+    "Leaderboard": {"Type": "Public and Private", "Limit": "Unlimited"},
+    "Integrations": "All integrations (IDE plugins, communication, project management, calendars, custom SDKs, enterprise features)",
+    "ExportData": true,
+    "MobileFeatures": true,
+    "AudioFeatures": true,
+    "Support": "Community forum, documentation, open source",
+    "FeaturesIncluded": [
+      "Comprehensive Activity Tracking",
+      "Terminal Intelligence", 
+      "Browser Monitoring",
+      "Mobile Tracking Suite",
+      "Emotion Analytics",
+      "Vibe Social System",
+      "AI Integration and Token Tracking",
+      "Location Intelligence",
+      "Advanced Analytics",
+      "Reporting and Exports",
+      "Integrations Marketplace with SDK",
+      "Privacy and Security Controls",
+      "Cross‑Platform Client Support",
+      "Team Dashboards and Metrics",
+      "Enterprise Onboarding",
+      "Legal & Compliance Tools",
+      "SSO and Custom Integrations",
+      "Ancient Mathematics Engine",
+      "Wise Vibe Mentorship",
+      "Elder Badge System",
+      "Traffic Safety Optimization",
+      "Social Anxiety Elimination"
+    ]
+  },
   "PaymentAndBilling": {
     "Products": ["Free", "Essential", "Elite", "Team", "Business"],
     "StripeSetup": {
@@ -584,7 +543,7 @@
     "CLI": {
       "ToolName": "ivb",
       "Language": "Rust",
-      "Capabilities": ["Capture events for headless sessions","View summaries","Export data", "Manage account and subscriptions", "Configure integrations"]
+      "Capabilities": ["Capture events for headless sessions","View summaries","Export data", "Manage account settings", "Configure integrations"]
     },
     "BrowserExtension": {
       "Languages": "TypeScript",
@@ -694,12 +653,8 @@
     "TotalDurationWeeks": 19
   },
   "DataRetention": {
-    "Matrix": {
-      "Free": {"RawEvents": "7 days", "Summaries": "90 days", "AudioObjects": "30 days", "Embeddings": "90 days"},
-      "Essential": {"RawEvents": "14 days", "Summaries": "180 days", "AudioObjects": "90 days", "Embeddings": "180 days"},
-      "Elite": {"RawEvents": "Infinite", "Summaries": "Infinite", "AudioObjects": "365 days", "Embeddings": "Infinite"},
-      "Team": {"RawEvents": "365 days (extendable)", "Summaries": "Infinite", "AudioObjects": "Configurable", "Embeddings": "Infinite"},
-      "Business": {"RawEvents": "Policy driven", "Summaries": "Infinite", "AudioObjects": "Configurable", "Embeddings": "Infinite"}
+    "UniversalPolicy": {
+      "AllUsers": {"RawEvents": "Unlimited", "Summaries": "Unlimited", "AudioObjects": "Configurable", "Embeddings": "Unlimited"}
     }
   },
   "FutureEnhancements": [
@@ -712,7 +667,7 @@
     "Add blockchain‑backed verification of Vibe interactions for trustless validation",
     "Expand to enterprise deployment with advanced governance and compliance tools"
   ],
-  "ConversionPrompt": "You are an AI engineer assigned to refactor the legacy iVibe.live codebase. The current implementation is written in older languages. Your task is to convert this code to Rust (for the core backend, services, and capture modules) and TypeScript (for frontend, browser extension, and SDKs), preserving every feature described in the blueprint. Do not remove or simplify functionality; instead, re‑implement watchers, event gateways, servers, vectorisers, summarisers, ETL jobs, social engines, emotion detection, AI integration, location intelligence, vibe scoring, privacy controls, and subscription logic using Rust and TypeScript. Use OpenAI APIs for summarisation (replace any Llama usage) and store API keys in environment variables rather than hard‑coding. Ensure performance and memory safety by leveraging Rust's ownership model and async runtimes; use WebAssembly and N‑API to bridge critical path code into TypeScript. Implement comprehensive supply‑chain risk mitigations: run cargo audit and cargo deny in CI, vendor dependencies, commit Cargo.lock; commit package‑lock or pnpm‑lock, run npm audit, enable provenance and pin versions; enforce 2FA on repositories and registries. Maintain the architecture with capture, transport, processing, and presentation planes; use Rust gRPC for streaming, TimescaleDB and pgvector for storage, Grafana for dashboards, Stripe for billing, and Keycloak for identity. Honour privacy by vectorising audio and storing only embeddings, enabling geofencing and selective sharing. Support cross‑platform clients (desktop, browser, mobile, CLI) with hot reload and live view. Integrate all IDE plugins and external services through the new SDK. Preserve the tier matrix with the prices and features described (Free, Essential, Elite, Team, Business). Ensure subscription enforcement via middleware and webhook handlers. Reference this blueprint to confirm that no feature is omitted, and deliver production‑ready, well‑documented code in the new languages."
+  "ConversionPrompt": "You are an AI engineer assigned to refactor the legacy iVibe.live codebase. The current implementation is written in older languages. Your task is to convert this code to Rust (for the core backend, services, and capture modules) and TypeScript (for frontend, browser extension, and SDKs), preserving every feature described in the blueprint. Do not remove or simplify functionality; instead, re‑implement watchers, event gateways, servers, vectorisers, summarisers, ETL jobs, social engines, emotion detection, AI integration, location intelligence, vibe scoring, and privacy controls using Rust and TypeScript. Use OpenAI APIs for summarisation (replace any Llama usage) and store API keys in environment variables rather than hard‑coding. Ensure performance and memory safety by leveraging Rust's ownership model and async runtimes; use WebAssembly and N‑API to bridge critical path code into TypeScript. Implement comprehensive supply‑chain risk mitigations: run cargo audit and cargo deny in CI, vendor dependencies, commit Cargo.lock; commit package‑lock or pnpm‑lock, run npm audit, enable provenance and pin versions; enforce 2FA on repositories and registries. Maintain the architecture with capture, transport, processing, and presentation planes; use Rust gRPC for streaming, TimescaleDB and pgvector for storage, Grafana for dashboards, and Keycloak for identity. Honour privacy by vectorising audio and storing only embeddings, enabling geofencing and selective sharing. Support cross‑platform clients (desktop, browser, mobile, CLI) with hot reload and live view. Integrate all IDE plugins and external services through the new SDK. All features are universally available to every user without restrictions or tiers. Authentication is only for security, not feature gating. Reference this blueprint to confirm that no feature is omitted, and deliver production‑ready, well‑documented code in the new languages."
 }
 ```
 
@@ -724,7 +679,7 @@
 
 ## 1. High‑Level Overview
 
-iVibe is a distributed telemetry and analytics system that captures developer activity, multi‑modal user context, and AI usage, then stores and surfaces that information through a unified Grafana dashboard. The platform is fully self‑hosted, privacy‑respecting by design, and monetised via Stripe‑backed subscription tiers. The solution comprises four logical planes:
+iVibe is a distributed telemetry and analytics system that captures developer activity, multi‑modal user context, and AI usage, then stores and surfaces that information through a unified Grafana dashboard. The platform is fully self‑hosted, privacy‑respecting by design, and community-funded and completely free. The solution comprises four logical planes:
 
 1. **Capture Plane** – local agents that detect events on desktop, mobile, and browser environments.
 2. **Transport Plane** – secure message exchange, primarily via gRPC over TLS and supplemental local REST endpoints when required.
@@ -754,7 +709,6 @@ All planes communicate inside the user’s network boundary, with optional outbo
 | AI Proxy     | **Helicone**               | Go                                         | Observes and logs OpenAI or Anthropic calls              |
 | Presentation | **Grafana OSS 11**         | Data source: Postgres                      | Dashboards, alerting, share links                        |
 | Presentation | **Public Profile API**     | FastAPI                                    | Serves controlled public JSON and HTML views             |
-| Billing      | **Stripe Webhook Handler** | Flask                                      | Seat tracking, tier enforcement                          |
 | Identity     | **Keycloak**               | OIDC                                       | SSO for all web UIs and gateway mutual‑TLS certs         |
 
 ---
@@ -804,7 +758,7 @@ All planes communicate inside the user’s network boundary, with optional outbo
      - `mv_token_usage`
   2. Runs **Summariser Job** which:
      - Pulls the last 24h of events per project.
-     - Generates a markdown digest via local model unless the user’s tier is Pro or above, in which case the job can proxy to GPT‑4o for higher quality.
+     - Generates a markdown digest via local model using OpenAI GPT-4o for all users.
      - Inserts result into \`\`.
 
 ### 3.6 Presentation Layer
@@ -825,18 +779,52 @@ All planes communicate inside the user’s network boundary, with optional outbo
 | Kafka → Vectoriser          | Kafka Consumer API                    | `events_raw` topic           |
 | Vectoriser → Postgres       | psycopg binary protocol               | `INSERT ... ON CONFLICT`     |
 | Airflow → LLM               | HTTP 1.1 through Helicone             | OpenAI Chat Completions JSON |
-| Stripe → Webhook Handler    | HTTPS POST                            | Stripe `event` JSON          |
 | Keycloak → All              | OIDC JWT                              | Bearer header                |
 
 ---
 
-## 5. Subscription Enforcement Logic
+## 5. Universal Access Architecture
 
-1. **On session initiation** a middleware queries `users.tier` and sets request context variables `retention_days`, `integration_limit`, `leaderboard_size`.
-2. **Dashboard queries** include `WHERE ts >= now() - interval '{retention_days} days'` to enforce history limits.
-3. **Gatekeeping decorators** on integration endpoints validate the user’s tier before issuing OAuth flows.
-4. Seats for Team and Business tiers are counted weekly using the `distinct user_id where active_since > now() - '7 days'::interval` metric and reconciled back to Stripe with `usage_record_summaries`.
+1. **Authentication** for security only - no feature restrictions or limitations.
+2. **Dashboard queries** have no history limits - unlimited retention for all users.
+3. **Integration endpoints** are available to all authenticated users without restrictions.
+4. **All features** are universally accessible regardless of user status.
+## 5. Universal Access Architecture
 
+1. **Authentication** for security only - no feature restrictions or limitations.
+2. **Dashboard queries** have no history limits - unlimited retention for all users.
+3. **Integration endpoints** are available to all authenticated users without restrictions.
+4. **All features** are universally accessible regardless of user status.
+## 5. Universal Access Architecture
+
+1. **Authentication** for security only - no feature restrictions or limitations.
+2. **Dashboard queries** have no history limits - unlimited retention for all users.
+3. **Integration endpoints** are available to all authenticated users without restrictions.
+4. **All features** are universally accessible regardless of user status.
+## 5. Universal Access Architecture
+
+1. **Authentication** for security only - no feature restrictions or limitations.
+2. **Dashboard queries** have no history limits - unlimited retention for all users.
+3. **Integration endpoints** are available to all authenticated users without restrictions.
+4. **All features** are universally accessible regardless of user status.
+## 5. Universal Access Architecture
+
+1. **Authentication** for security only - no feature restrictions or limitations.
+2. **Dashboard queries** have no history limits - unlimited retention for all users.
+3. **Integration endpoints** are available to all authenticated users without restrictions.
+4. **All features** are universally accessible regardless of user status.
+## 5. Universal Access Architecture
+
+1. **Authentication** for security only - no feature restrictions or limitations.
+2. **Dashboard queries** have no history limits - unlimited retention for all users.
+3. **Integration endpoints** are available to all authenticated users without restrictions.
+4. **All features** are universally accessible regardless of user status.
+## 5. Universal Access Architecture
+
+1. **Authentication** for security only - no feature restrictions or limitations.
+2. **Dashboard queries** have no history limits - unlimited retention for all users.
+3. **Integration endpoints** are available to all authenticated users without restrictions.
+4. **All features** are universally accessible regardless of user status.
 ---
 
 ## 6. Security Controls
@@ -874,7 +862,6 @@ flowchart LR
     S --> P
     H(Helicone) -->|metrics| P
     P --> Gra[Grafana]
-    Stripe((Stripe)) --> W(Webhook)
     W --> P
   end
 ```
@@ -901,15 +888,16 @@ sequenceDiagram
 
 ---
 
-## 10. Data Retention Matrix
+## 10. Universal Data Retention
 
-| Tier     | Raw Events           | Summaries | Audio Objects | Vector Embeddings |
-| -------- | -------------------- | --------- | ------------- | ----------------- |
-| Free     | 7 days               | 90 days   | 30 days       | 90 days           |
-| Basic    | 14 days              | 180 days  | 90 days       | 180 days          |
-| Pro      | Infinite             | Infinite  | 365 days      | Infinite          |
-| Team     | 365 days, extendable | Infinite  | Configurable  | Infinite          |
-| Business | Policy driven        | Infinite  | Configurable  | Infinite          |
+**All users enjoy unlimited data retention:**
+
+| Data Type | Retention Policy |
+| --------- | --------------- |
+| Raw Events | Unlimited |
+| Summaries | Unlimited |
+| Audio Objects | Configurable (unlimited by default) |
+| Vector Embeddings | Unlimited |
 
 ---
 
@@ -926,7 +914,7 @@ sequenceDiagram
 # iVibe Platform – End‑to‑End Build Plan
 
 **Domain:** iVibe.live  
-**Primary Goal:** Local, privacy‑focused activity analytics and AI context engine that rivals WakaTime, adds multi‑modal tracking, and offers paid tiers through Stripe.
+**Primary Goal:** Local, privacy‑focused activity analytics and AI context engine that rivals WakaTime, adds multi‑modal tracking, and is completely free for all users.
 
 ---
 ## 0. Foundational Decisions
@@ -966,23 +954,7 @@ sequenceDiagram
 
 ---
 ## 4. Subscription & Billing (M4)
-### 4.1 Tier Matrix
-| Tier | Monthly | Yearly | Features |
-| --- | --- | --- | --- |
-| **Free** | $0 | $0 | 1‑week history, weekly email report, 1 goal, public leaderboard |
-| **Basic** | $5 | $48 | 2‑week history, daily+weekly emails, 3 goals, private leaderboard ≤5 devs, basic integrations, priority email support |
-| **Pro** | $10 | $96 | Unlimited history, unlimited goals, private leaderboards ≤50 devs, invoices, premium commit & PR stats, all integrations, export, priority chat support, mobile audio + location tracker |
-| **Team** | $17 per dev | $180 per dev | Up to 100 devs, unlimited team dashboards, team commit & PR stats, team integrations, private leaderboards ≤100, export, custom privacy rules |
-| **Business** | $20 per dev | $216 per dev | 100‑1,000 devs, onboarding training, stats for 1k devs, leaderboards ≤1k, priority Zoom support, custom integrations, SSO |
 
-### 4.2 Stripe Implementation
-1. **Products & Prices** – Create five products (Free is metered at $0). Attach recurring prices (monthly, yearly) with per‑seat quantity for Team/Business.
-2. **Checkout** – Stripe hosted checkout with `client_reference_id = user_id` and `subscription_data[metadata][tier]`.
-3. **Webhook handler** – `/stripe/webhook` in Flask to:
-   * update `users.tier`, `users.subscription_id`, `seats`.
-   * provision role limits (e.g., dashboard retention).
-4. **Billing portal** – Enable Stripe Customer Portal for upgrades, payment methods, invoices.
-5. **Usage reconciliation** – Cron job counts active dev seats ➜ `stripe.SubscriptionItem.create_usage_record`.
 
 ---
 ## 5. Privacy, Consent & Telemetry (M5)

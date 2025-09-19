@@ -6,7 +6,7 @@ This directory defines the PostgreSQL schema and data management strategy for iV
 - **events_raw** – TimescaleDB hypertable for raw capture events.
 - **embeddings** – pgvector table storing high‑dimensional embeddings.
 - **summaries** – generated activity summaries with associated vectors.
-- **users** – account, tier, and subscription metadata.
+- **users** – account and profile metadata.
 - **vibe_scores** – derived vibe metrics per user.
 
 ## Extensions
@@ -26,4 +26,4 @@ This directory defines the PostgreSQL schema and data management strategy for iV
 - `mv_token_usage`
 
 ## Retention
-- Enforce tier‑based data retention policies across raw and aggregated data.
+- No retention limits - all users have unlimited data storage.

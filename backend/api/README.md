@@ -22,16 +22,10 @@ Serves on **port 8082** with a single `/graphql` endpoint that provides equivale
 
 1. Obtain a JWT access token from **Keycloak** via the OpenID Connect token endpoint.
 2. Include the token in requests using `Authorization: Bearer <token>`.
-3. Middleware validates the signature, checks claims, applies CORS and compression, and enforces subscription tier quotas.
+3. Middleware validates the signature, checks claims, applies CORS and compression, and provides universal access to all features.
 
 ## Rate Limits
 
-| Tier | Requests per minute |
-| ---- | ------------------ |
-| Free | 60 |
-| Basic | 120 |
-| Pro | 600 |
-| Team | 1200 |
-| Business | 6000 |
+**Universal Rate Limit: 600 requests per minute for all users**
 
-Limits apply across both REST and GraphQL endpoints. Exceeding the quota returns HTTP **429 Too Many Requests**.
+Rate limits apply for performance and security purposes only, not to restrict features. All users have access to the same generous rate limits. Exceeding the quota returns HTTP **429 Too Many Requests**.

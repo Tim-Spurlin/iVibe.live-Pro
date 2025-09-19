@@ -12,7 +12,7 @@
   
   *Replace algorithmic feeds and superficial likes with proximity-based growth, user-controlled privacy, and meaningful relationships*
   
-  [🚀 Quick Start](#-quick-start) • [📚 Documentation](#-documentation) • [💰 Pricing](#-pricing-plans) • [🛠️ Architecture](#%EF%B8%8F-system-architecture) • [🔒 Security](#-security--privacy)
+  [🚀 Quick Start](#-quick-start) • [📚 Documentation](#-documentation) • [💰 Universal Free Access](#-universal-free-access) • [🛠️ Architecture](#%EF%B8%8F-system-architecture) • [🔒 Security](#-security--privacy)
   
 </div>
 
@@ -35,10 +35,10 @@
   - [Capture Modules](#capture-modules)
   - [Processing Services](#processing-services)
   - [API Services](#api-services)
-- [💰 Pricing Plans](#-pricing-plans)
-  - [Subscription Tiers](#subscription-tiers)
-  - [Feature Comparison](#feature-comparison)
-  - [Data Retention Matrix](#data-retention-matrix)
+- [💰 Universal Free Access](#-universal-free-access)
+  - [No Tiers, No Limits](#no-tiers-no-limits-no-subscriptions)
+  - [Complete Feature Access](#complete-feature-access)
+  - [No Data Retention Limits](#no-data-retention-limits)
 - [🚀 Quick Start](#-quick-start)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
@@ -151,28 +151,30 @@ Every recognition post is timed for **maximum positive engagement**:
 - **Engagement probability prediction** using machine learning on historical data
 - **Harmony amplification** - timing that promotes peace and reduces social tension
 
-### Feature Matrix
+### Complete Feature Set
 
-| Feature | Free | Essential | Elite | Team | Business |
-|---------|------|-----------|-------|------|----------|
-| **Activity Tracking** | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **Terminal Intelligence** | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **Browser Monitoring** | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **Vibe Social System** | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **Advanced Analytics** | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **Ancient Mathematics Engine** | ❌ | ✅ | ✅ | ✅ | ✅ |
-| **Wise Vibe Mentorship** | ❌ | ❌ | ✅ | ✅ | ✅ |
-| **Elder Badge System** | ❌ | ❌ | ✅ | ✅ | ✅ |
-| **AI Token Tracking** | ❌ | ✅ | ✅ | ✅ | ✅ |
-| **Mobile Suite** | ❌ | ❌ | ✅ | ✅ | ✅ |
-| **Emotion Analytics** | ❌ | ❌ | ✅ | ✅ | ✅ |
-| **Location Intelligence** | ❌ | ❌ | ✅ | ✅ | ✅ |
-| **Traffic Safety Optimization** | ❌ | ❌ | ✅ | ✅ | ✅ |
-| **Social Anxiety Elimination** | ❌ | ❌ | ✅ | ✅ | ✅ |
-| **Custom Integrations** | ❌ | ❌ | ✅ | ✅ | ✅ |
-| **Export Data** | ❌ | ❌ | ✅ | ✅ | ✅ |
-| **Team Dashboards** | ❌ | ❌ | ❌ | ✅ | ✅ |
-| **SSO/Enterprise** | ❌ | ❌ | ❌ | ❌ | ✅ |
+**All features are available to every user - completely free, forever.**
+
+| Feature | Description |
+|---------|-------------|
+| **📊 Activity Tracking** | Complete desktop, terminal, browser, and mobile monitoring |
+| **🧠 Terminal Intelligence** | Command capture, error classification, success rate analysis |
+| **🌐 Browser Monitoring** | URL tracking, tab duration, AI chat detection, research classification |
+| **🤝 Vibe Social System** | Proximity detection, compatibility scoring (1-1000), friend requests |
+| **📈 Advanced Analytics** | Unlimited dashboard history, real-time metrics, comprehensive insights |
+| **🧮 Ancient Mathematics Engine** | Celestial harmony formulas, optimal timing calculations |
+| **👥 Wise Vibe Mentorship** | Elder/Grasshopper pairing, wisdom transmission system |
+| **🏆 Elder Badge System** | Recognition for exceptional wisdom patterns and experience |
+| **🤖 AI Token Tracking** | Complete AI usage monitoring, cost analysis, all providers |
+| **📱 Mobile Suite** | Full app usage, location intelligence, emotion analytics |
+| **😊 Emotion Analytics** | Facial recognition, mood patterns, trigger analysis |
+| **📍 Location Intelligence** | GPS tracking, place detection, context awareness |
+| **🚦 Traffic Safety Optimization** | Real-time accident prevention, schedule rescheduling |
+| **💆 Social Anxiety Elimination** | Algorithmic social support, confidence building |
+| **🔌 Custom Integrations** | 100+ IDE plugins, external services, custom SDK |
+| **📤 Export Data** | Complete data export in CSV, JSON, PDF, SVG formats |
+| **👥 Team Dashboards** | Organization metrics, unlimited users, collaboration tools |
+| **🔒 SSO/Enterprise** | Single sign-on, advanced privacy, enterprise features |
 
 ### Platform Capabilities
 
@@ -629,33 +631,35 @@ graph LR
 
 ### API Services
 
+**All endpoints available to every user without restrictions**
+
 | Endpoint | Method | Purpose | Auth Required |
 |----------|--------|---------|---------------|
 | `/api/events` | POST | Submit event batch | JWT |
 | `/api/dashboard` | GET | Fetch user metrics | JWT |
 | `/api/vibe/nearby` | GET | Find nearby vibers | JWT + Location |
 | `/api/vibe/score` | POST | Calculate compatibility score | JWT |
-| `/api/vibe/wise-match` | GET | Find Elder/Grasshopper pairings | JWT + Elite+ |
-| `/api/schedule/optimize` | POST | Ancient math scheduling | JWT + Elite+ |
-| `/api/traffic/safety` | GET | Real-time accident risk assessment | JWT + Elite+ |
-| `/api/astrology/alignment` | GET | Celestial timing recommendations | JWT + Elite+ |
+| `/api/vibe/wise-match` | GET | Find Elder/Grasshopper pairings | JWT |
+| `/api/schedule/optimize` | POST | Ancient math scheduling | JWT |
+| `/api/traffic/safety` | GET | Real-time accident risk assessment | JWT |
+| `/api/astrology/alignment` | GET | Celestial timing recommendations | JWT |
 | `/api/wisdom/badges` | GET | Elder badge eligibility | JWT |
 | `/api/profile/{id}` | GET | Public profile | Optional |
-| `/api/export` | POST | Generate data export | JWT + Tier |
+| `/api/export` | POST | Generate data export (all formats) | JWT |
 | `/api/integrations` | GET/POST | Manage integrations | JWT |
 | `/webhook/stripe` | POST | Billing updates | Signature |
 
 ---
 
-## 🌟 Completely Free Platform
+## 💰 Universal Free Access
 
-### Universal Access for Global Harmony
+### No Tiers, No Limits, No Subscriptions
 
-**iVibe.live is 100% FREE for everyone, forever.** Our mission is to foster global peace, unity, and harmony for all humanity - not to profit from human connection. 
+**iVibe.live is 100% FREE for everyone, forever.** Our mission is to foster global peace, unity, and harmony for all humanity - not to profit from human connection.
 
-### All Features Included
+### Complete Feature Access
 
-Every user has access to **ALL** features:
+Every user has **unlimited access** to every feature:
 
 | Feature Category | What's Included |
 |------------------|-----------------|
@@ -672,7 +676,16 @@ Every user has access to **ALL** features:
 | **🕐 Optimal Timing Engine** | Ancient mathematics-based scheduling for maximum positive impact |
 | **🌅 Timezone Intelligence** | Seamless global recognition posting aligned with local time zones |
 
-### Donation-Supported Model
+### No Data Retention Limits
+
+All users enjoy:
+- **Unlimited** raw event history
+- **Unlimited** AI summaries and insights  
+- **Unlimited** embeddings and analysis
+- **Configurable** audio object retention
+- **Complete** data export capabilities in all formats (CSV, JSON, PDF, SVG)
+
+### Community-Supported Model
 
 While **completely free to use**, donations help us:
 - Maintain servers and infrastructure
@@ -681,15 +694,6 @@ While **completely free to use**, donations help us:
 - Expand to underserved communities worldwide
 
 **Donations are helpful but never necessary.** Every human deserves access to tools that promote harmony and reduce social isolation.
-
-### Data Retention - No Limits
-
-All users enjoy:
-- **Unlimited** raw event history
-- **Unlimited** AI summaries and insights  
-- **Unlimited** embeddings and analysis
-- **Configurable** audio object retention
-- **Complete** data export capabilities
 
 ---
 
@@ -1110,20 +1114,22 @@ graph TB
 
 ### Metric Categories
 
-| Category | Metrics | Update Frequency | Tiers |
-|----------|---------|------------------|-------|
-| **Productivity** | Time by app/language, idle time, focus sessions | Real-time | All |
-| **Terminal** | Commands run, errors fixed, success rate | Per command | All |
-| **Browser** | Sites visited, research time, AI chat usage | Real-time | All |
-| **Emotions** | Mood patterns, triggers, happiness index | Hourly | Elite+ |
-| **AI Usage** | Tokens consumed, cost per project, provider breakdown | Daily | Essential+ |
-| **Vibe Social** | Score trends, nearby vibers, connection strength | Real-time | All |
-| **Wisdom Matching** | Elder badges earned, mentorship success rate, knowledge transfer efficiency | Daily | Elite+ |
-| **Ancient Mathematics** | Formula accuracy, prediction success rate, schedule optimization effectiveness | Hourly | Elite+ |
-| **Traffic Safety** | Accident risks avoided, schedule adjustments, safety score improvements | Real-time | Elite+ |
-| **Astrological Sync** | Celestial alignment accuracy, timing optimization, cosmic harmony index | Daily | Elite+ |
-| **Social Anxiety** | Anxiety reduction metrics, successful social interactions, confidence growth | Weekly | Elite+ |
-| **Location** | Places visited, time at locations, travel patterns | Hourly | Elite+ |
+**All metrics available to every user in real-time**
+
+| Category | Metrics | Update Frequency |
+|----------|---------|------------------|
+| **Productivity** | Time by app/language, idle time, focus sessions | Real-time |
+| **Terminal** | Commands run, errors fixed, success rate | Per command |
+| **Browser** | Sites visited, research time, AI chat usage | Real-time |
+| **Emotions** | Mood patterns, triggers, happiness index | Hourly |
+| **AI Usage** | Tokens consumed, cost per project, provider breakdown | Daily |
+| **Vibe Social** | Score trends, nearby vibers, connection strength | Real-time |
+| **Wisdom Matching** | Elder badges earned, mentorship success rate, knowledge transfer efficiency | Daily |
+| **Ancient Mathematics** | Formula accuracy, prediction success rate, schedule optimization effectiveness | Hourly |
+| **Traffic Safety** | Accident risks avoided, schedule adjustments, safety score improvements | Real-time |
+| **Astrological Sync** | Celestial alignment accuracy, timing optimization, cosmic harmony index | Daily |
+| **Social Anxiety** | Anxiety reduction metrics, successful social interactions, confidence growth | Weekly |
+| **Location** | Places visited, time at locations, travel patterns | Hourly |
 
 ---
 
@@ -1186,14 +1192,16 @@ graph LR
 
 ### Android Permissions
 
-| Permission | Purpose | Required |
-|------------|---------|----------|
-| **RECORD_AUDIO** | Emotion detection, audio vectorization | Elite+ |
-| **CAMERA** | Facial emotion analysis | Elite+ |
-| **ACCESS_FINE_LOCATION** | Proximity detection, place intelligence | Elite+ |
-| **READ_PHONE_STATE** | Call metadata for productivity | Elite+ |
-| **PACKAGE_USAGE_STATS** | App usage tracking | All tiers |
-| **BLUETOOTH/BLUETOOTH_ADMIN** | Vibe detection via BLE | All tiers |
+**All permissions available for full functionality**
+
+| Permission | Purpose | 
+|------------|---------|
+| **RECORD_AUDIO** | Emotion detection, audio vectorization |
+| **CAMERA** | Facial emotion analysis |
+| **ACCESS_FINE_LOCATION** | Proximity detection, place intelligence |
+| **READ_PHONE_STATE** | Call metadata for productivity |
+| **PACKAGE_USAGE_STATS** | App usage tracking |
+| **BLUETOOTH/BLUETOOTH_ADMIN** | Vibe detection via BLE |
 
 ---
 

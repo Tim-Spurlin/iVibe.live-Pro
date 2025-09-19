@@ -3,7 +3,7 @@
 This directory contains SQL scripts used for populating the database with deterministic data for development and automated tests.
 
 ## Demo user creation
-- Provide demo accounts for each subscription tier (Free, Basic, Pro, Team, Business).
+- Provide demo accounts for testing purposes with various activity patterns.
 - Use synthetic names and addresses; avoid real personally identifiable information.
 - Ensure fields conform to definitions in `database/schemas` to satisfy schema testing requirements.
 

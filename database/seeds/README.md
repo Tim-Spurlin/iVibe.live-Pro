@@ -3,7 +3,7 @@
 This folder contains SQL scripts that populate the database with predictable data for tests and local development.
 
 ## Files
-- **demo_users.sql** (criticality: 6) — inserts demo accounts across subscription tiers for authentication and billing tests.
+- **demo_users.sql** (criticality: 6) — inserts demo accounts with various activity patterns for authentication and functionality tests.
 - **test_events.sql** (criticality: 6) — generates synthetic events with precomputed vibe scores for analytics validation.
 
 ## Usage

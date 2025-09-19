@@ -5,8 +5,7 @@
   - src/scheduler.rs
   - src/openai/gpt4o.rs
   - src/summary_builder.rs
-  - src/tier_check.rs
 - Schedule: Daily at 04:00 UTC
-- Model: GPT-4o via Helicone for Pro+ tiers
-- Tier logic: Free/Essential use local model, Elite+ use GPT-4o
+- Model: GPT-4o via Helicone for all users
+- Access: Universal - all users get high-quality AI summaries
 - Output: Markdown summaries in summaries table
