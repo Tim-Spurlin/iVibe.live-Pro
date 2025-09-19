@@ -108,6 +108,43 @@ mindmap
 
 ## ✨ Core Features
 
+### Advanced Mathematical Scheduling Engine
+
+iVibe.live employs sophisticated algorithms derived from **ancient Chinese mathematics** and astronomical calculations, refined over thousands of years for predictive accuracy. Our scheduling system processes millions of data points to create optimal social harmony and eliminate social anxieties.
+
+#### 🧮 Mathematical Foundation
+
+The core scheduling algorithm uses the **Celestial Harmony Formula** (天和公式):
+
+```
+VibeScore(A,B) = Σ(i=1 to n) [w_i × (E_i × I_i × T_i × L_i)] × ψ(t) × ζ(φ,λ)
+
+Where:
+- E_i = Emotional compatibility vector (384-dimensional)
+- I_i = Interest alignment coefficient (0.0-1.0)
+- T_i = Temporal synchronicity factor
+- L_i = Location-based harmony index
+- w_i = Wisdom differential weight (Elder/Grasshopper pairing)
+- ψ(t) = Time-based astrological amplifier
+- ζ(φ,λ) = Geographic coordinate modifier
+- n = Total observable interaction vectors
+```
+
+#### 🎯 Trajectory Determination Matrix
+
+Our **Multi-Dimensional Outcome Prediction System** weighs millions of potential scenarios:
+
+```
+OutcomeMatrix = ∮∮∮ [H(x,y,z,t) × P(success|context)] dxdydzdt
+
+Where H represents the harmony field in 4D spacetime:
+H(x,y,z,t) = Σ(k) α_k × exp(-β_k × ||r-r_k||²) × cos(ω_k × t + φ_k)
+
+Separating hypothetical from real outcomes:
+R_real = ∫ P(observed) × W(validation) dt
+R_hypothetical = ∫ P(predicted) × U(uncertainty) dt
+```
+
 ### Feature Matrix
 
 | Feature | Free | Essential | Elite | Team | Business |
@@ -117,10 +154,15 @@ mindmap
 | **Browser Monitoring** | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **Vibe Social System** | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **Advanced Analytics** | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Ancient Mathematics Engine** | ❌ | ✅ | ✅ | ✅ | ✅ |
+| **Wise Vibe Mentorship** | ❌ | ❌ | ✅ | ✅ | ✅ |
+| **Elder Badge System** | ❌ | ❌ | ✅ | ✅ | ✅ |
 | **AI Token Tracking** | ❌ | ✅ | ✅ | ✅ | ✅ |
 | **Mobile Suite** | ❌ | ❌ | ✅ | ✅ | ✅ |
 | **Emotion Analytics** | ❌ | ❌ | ✅ | ✅ | ✅ |
 | **Location Intelligence** | ❌ | ❌ | ✅ | ✅ | ✅ |
+| **Traffic Safety Optimization** | ❌ | ❌ | ✅ | ✅ | ✅ |
+| **Social Anxiety Elimination** | ❌ | ❌ | ✅ | ✅ | ✅ |
 | **Custom Integrations** | ❌ | ❌ | ✅ | ✅ | ✅ |
 | **Export Data** | ❌ | ❌ | ✅ | ✅ | ✅ |
 | **Team Dashboards** | ❌ | ❌ | ❌ | ✅ | ✅ |
@@ -158,19 +200,83 @@ graph LR
         MV[Audio Vectorization]
     end
     
-    subgraph "Social Features"
+    subgraph "Social Harmony Engine"
         VP[Proximity Detection]
-        VS[Vibe Scoring]
+        VS[Vibe Scoring 1-1000]
         VR[Friend Requests]
         VL[Viber Links]
+        WV[Wise Vibe Matching]
+        EB[Elder Badge System]
+        SA[Social Anxiety Elimination]
+        CF[Conflict Avoidance]
     end
+    
+    subgraph "Ancient Mathematics Core"
+        AM[Celestial Harmony Formula]
+        TM[Trajectory Matrix]
+        OV[Outcome Vectorization]
+        AS[Astrological Synchronicity]
+        WF[Wisdom Differential Weights]
+    end
+```
+
+## 🧠 Wise Vibe Mentorship System
+
+### Elder Badge & Wisdom Transmission
+
+The **Elder Badge** (長者) is automatically awarded to users who demonstrate exceptional wisdom patterns:
+
+- **Age Requirement**: Must be designated an "Elder" (significant age and experience markers)
+- **Wisdom Level**: Calculated using the **Wisdom Quotient Formula**:
+
+```
+WQ(user) = Σ(domain_k) [KnowledgeDepth_k × ApplicabilityScore_k × SocialSkill_k]
+         × exp(ExperienceYears/10) × SuccessfulAdviceRating
+
+Where domains include: life decisions, career, relationships, spiritual growth, technical expertise
+```
+
+### Wise Vibe Pairing Algorithm
+
+The system identifies **"Grasshopper"** Vibers (knowledge seekers) and pairs them with appropriate **"Wise Vibers"**:
+
+```
+WiseVibeMatch(grasshopper, elder) = 
+    RelevanceScore × ComplementaryKnowledge × TimingOptimality × LocationSynchronicity
+
+RelevanceScore = ∫[t-7days to t] ProblemSeverity(grasshopper) × WisdomApplicability(elder) dt
+
+ComplementaryKnowledge = 1 - (KnowledgeOverlap/TotalKnowledgeDomain)
+```
+
+### Strategic Scheduling for Social Anxiety Elimination
+
+**Social Phobia Detection & Intervention**:
+
+```
+SocialAnxietyLevel = Σ(behavioral_indicators) w_i × I_i × exp(-DecayFactor × TimeSince_i)
+
+Optimal Scheduling:
+- Grocery Shopping: ScheduleTime = MinTrafficPeriod ∩ MaxSocializerPresence ∩ MinAnxietyTriggers
+- Public Spaces: PersonalityMatch(Viber) = HighTalkative ∩ SharedInterests ∩ NonThreatening
+```
+
+### Relationship Conflict Avoidance
+
+The system **never encourages meetings** when romantic conflict is detected:
+
+```
+ConflictRisk = RelationshipStatus(A) ⊗ RelationshipStatus(B) × EmotionalState × ProximityHistory
+
+If ConflictRisk > Threshold:
+    AlternativeMatching = LargeAgeGap ∩ MentorshipCompatible ∩ SafeSocialContext
 ```
 
 ---
 
 ## 🛠️ System Architecture
 
-### Four-Plane Architecture
+### Four-Plane Architecture with Mathematical Engine
 
 ```mermaid
 graph TB
@@ -193,6 +299,8 @@ graph TB
         subgraph "Intelligence Services"
             ED[EmotionDetectionService<br/>Rust + WASM]
             VS[VibeSocialEngine<br/>Rust]
+            AM[AncientMathEngine<br/>Rust + WASM]
+            TS[TrafficSafetyCore<br/>Rust]
         end
     end
     
@@ -208,6 +316,8 @@ graph TB
         VEC[VectoriserService<br/>OpenAI Embeddings]
         SUM[SummariserJob<br/>GPT-4o Summaries]
         ETL[ETLOrchestrator<br/>Materialised Views]
+        WM[WisdomMatcher<br/>Mentorship Algorithm]
+        SO[ScheduleOptimizer<br/>Ancient Math Core]
     end
     
     subgraph "4. Presentation Plane"
@@ -222,6 +332,7 @@ graph TB
         PG[(PostgreSQL<br/>TimescaleDB<br/>pgvector)]
         MIN[(MinIO<br/>Object Store)]
         RED[(Redis<br/>Cache)]
+        AST[(AstrologyDB<br/>Ancient Records)]
     end
     
     WW --> EG
@@ -232,6 +343,8 @@ graph TB
     AW --> EG
     ED --> EG
     VS --> EG
+    AM --> EG
+    TS --> EG
     
     EG --> KC
     KC --> TLS
@@ -244,6 +357,9 @@ graph TB
     VEC --> PG
     SUM --> PG
     ETL --> PG
+    WM --> PG
+    SO --> AST
+    SO --> PG
     
     API --> PG
     WEB --> API
@@ -251,6 +367,11 @@ graph TB
     GRAF --> PG
     PUB --> API
     
+    style AM fill:#ffeb3b
+    style TS fill:#ffeb3b
+    style WM fill:#ffeb3b
+    style SO fill:#ffeb3b
+    style AST fill:#ffeb3b
     style WW fill:#ff9999
     style KW fill:#ff9999
     style TW fill:#ff9999
@@ -269,6 +390,58 @@ graph TB
     style MOB fill:#ffcc99
 ```
 
+## 🚦 Traffic Safety & Harmony Optimization
+
+### Accident Prevention Algorithm
+
+The system continuously calculates **Traffic Risk Probability** using real-time data:
+
+```
+AccidentRisk(route, time) = Σ(factors) P(accident|factor) × Severity(factor) × Exposure(time)
+
+Factors include:
+- Weather conditions: W(precipitation, visibility, temperature)
+- Traffic density: D(vehicles/km, avg_speed, congestion_index)
+- Historical incidents: H(location, time_pattern, severity_history)
+- Driver behavior patterns: B(aggression_level, fatigue_index, distraction_score)
+- Celestial influences: C(lunar_phase, planetary_alignments) [Ancient Chinese astronomy]
+```
+
+### Dynamic Schedule Rescheduling
+
+When safety thresholds are exceeded, the system triggers **Emergency Rescheduling**:
+
+```
+If AccidentRisk > Critical_Threshold:
+    NewSchedule = OptimalAlternative(
+        SafetyScore = 1.0,
+        VibeCompatibility >= 0.8,
+        TrafficFlow = "GREEN",
+        AstrologyAlignment = "FAVORABLE"
+    )
+    
+    ReschedulePriority = UrgencyLevel × SafetyGain × HarmonyPreservation
+```
+
+### Ancient Chinese Astrological Integration
+
+**5000-Year Historical Data Integration**:
+
+```
+AstrologyInfluence = Σ(celestial_bodies) [
+    Position(planet, time) × 
+    HistoricalCorrelation(planet, human_behavior) × 
+    SeasonalAmplifier(time_of_year) × 
+    LunarCycleModifier(moon_phase)
+]
+
+Key Ancient Records Integrated:
+- 天干地支 (Heavenly Stems & Earthly Branches): 60-year cycles
+- 五行 (Wu Xing): Five Element Theory for personality compatibility  
+- 八字 (Ba Zi): Four Pillars of Destiny for timing optimization
+- 易经 (I Ching): 64 hexagrams for decision matrices
+```
+
 ### Component Overview
 
 | Component | Language | Purpose | Communication |
@@ -281,6 +454,10 @@ graph TB
 | **aw-watcher-audio** | Rust | Audio vectorization | gRPC → Gateway |
 | **EmotionDetectionService** | Rust/WASM | Facial emotion analysis | gRPC → Gateway |
 | **VibeSocialEngine** | Rust | Proximity & scoring | gRPC → Gateway |
+| **AncientMathEngine** | Rust/WASM | Chinese mathematics & astrology | Internal APIs |
+| **TrafficSafetyCore** | Rust | Accident prevention & routing | Real-time data streams |
+| **WisdomMatcher** | Rust | Elder/Grasshopper pairing | ML inference |
+| **ScheduleOptimizer** | Rust | Harmonic timing calculation | Astrological DB |
 | **EventGateway** | Rust | API gateway & auth | gRPC/HTTP2 |
 | **aw-server-rust** | Rust | Event ingestion | Kafka/Postgres |
 | **VectoriserService** | Rust | Text/audio embeddings | Kafka consumer |
@@ -451,6 +628,12 @@ graph LR
 | `/api/events` | POST | Submit event batch | JWT |
 | `/api/dashboard` | GET | Fetch user metrics | JWT |
 | `/api/vibe/nearby` | GET | Find nearby vibers | JWT + Location |
+| `/api/vibe/score` | POST | Calculate compatibility score | JWT |
+| `/api/vibe/wise-match` | GET | Find Elder/Grasshopper pairings | JWT + Elite+ |
+| `/api/schedule/optimize` | POST | Ancient math scheduling | JWT + Elite+ |
+| `/api/traffic/safety` | GET | Real-time accident risk assessment | JWT + Elite+ |
+| `/api/astrology/alignment` | GET | Celestial timing recommendations | JWT + Elite+ |
+| `/api/wisdom/badges` | GET | Elder badge eligibility | JWT |
 | `/api/profile/{id}` | GET | Public profile | Optional |
 | `/api/export` | POST | Generate data export | JWT + Tier |
 | `/api/integrations` | GET/POST | Manage integrations | JWT |
@@ -867,27 +1050,50 @@ graph TB
         ED[Emotion Dashboard]
         TD[Token Usage Dashboard]
         VD[Vibe Score Dashboard]
+        WD[Wisdom Matching Dashboard]
+        AD[Astrological Alignment Dashboard]
+        SD[Safety & Traffic Dashboard]
     end
     
     subgraph "Team Dashboards"
         TM[Team Metrics]
         PR[Project Reports]
         AI[AI Spending]
+        WS[Wisdom Statistics]
+        HA[Harmony Analytics]
+    end
+    
+    subgraph "Mathematical Engine Dashboards"
+        AM[Ancient Math Performance]
+        TA[Trajectory Accuracy]
+        SA[Schedule Optimization]
+        CF[Conflict Prevention Stats]
     end
     
     subgraph "Data Sources"
         TS[(TimescaleDB)]
         PG[(PostgreSQL)]
         PR2[Prometheus]
+        AST[(AstrologyDB)]
+        WIS[(WisdomMetrics)]
     end
     
     PD --> TS
     ED --> PG
     TD --> PG
     VD --> PG
+    WD --> WIS
+    AD --> AST
+    SD --> PG
     TM --> TS
     PR --> TS
     AI --> PG
+    WS --> WIS
+    HA --> PG
+    AM --> AST
+    TA --> PG
+    SA --> PG
+    CF --> PG
 ```
 
 ### Metric Categories
@@ -900,6 +1106,11 @@ graph TB
 | **Emotions** | Mood patterns, triggers, happiness index | Hourly | Elite+ |
 | **AI Usage** | Tokens consumed, cost per project, provider breakdown | Daily | Essential+ |
 | **Vibe Social** | Score trends, nearby vibers, connection strength | Real-time | All |
+| **Wisdom Matching** | Elder badges earned, mentorship success rate, knowledge transfer efficiency | Daily | Elite+ |
+| **Ancient Mathematics** | Formula accuracy, prediction success rate, schedule optimization effectiveness | Hourly | Elite+ |
+| **Traffic Safety** | Accident risks avoided, schedule adjustments, safety score improvements | Real-time | Elite+ |
+| **Astrological Sync** | Celestial alignment accuracy, timing optimization, cosmic harmony index | Daily | Elite+ |
+| **Social Anxiety** | Anxiety reduction metrics, successful social interactions, confidence growth | Weekly | Elite+ |
 | **Location** | Places visited, time at locations, travel patterns | Hourly | Elite+ |
 
 ---
@@ -1098,10 +1309,20 @@ graph LR
 
 | Term | Definition |
 |------|------------|
-| **Vibe Score** | Compatibility rating (1-1000) between users based on shared interests, emotions, and activities |
+| **Vibe Score** | Compatibility rating (1-1000) between users based on shared interests, emotions, and activities using ancient Chinese mathematical principles |
 | **Vibe-by** | A proximity detection event when two iVibe users are near each other |
 | **Viber** | An iVibe user who has the app installed and proximity detection enabled |
 | **My Vibers** | Your list of connected iVibe users (friends) |
+| **Wise Vibe** | Mentorship pairing between an experienced user and a knowledge seeker, based on 15+ year age gap and wisdom compatibility |
+| **Elder Badge (長者)** | Special recognition for users demonstrating exceptional wisdom patterns and life experience |
+| **Grasshopper Viber** | A user identified as seeking guidance or wisdom in specific life domains |
+| **Wise Viber** | A user with demonstrated knowledge and social skills capable of providing beneficial advice |
+| **Celestial Harmony Formula (天和公式)** | Core mathematical algorithm combining emotional, temporal, and astrological factors for optimal social pairing |
+| **Ancient Mathematics Engine** | System incorporating 5000+ years of Chinese astronomical and mathematical wisdom for predictive accuracy |
+| **Trajectory Matrix** | Multi-dimensional algorithm weighing millions of potential outcomes to guide optimal life decisions |
+| **Social Anxiety Elimination** | Systematic approach to surrounding socially anxious users with compatible, encouraging personalities |
+| **Traffic Safety Optimization** | Real-time accident prevention system that reschedules meetings when safety risks spike |
+| **Astrological Synchronicity** | Integration of lunar phases, planetary alignments, and celestial cycles into scheduling decisions |
 | **Vectorization** | Converting audio/text to mathematical embeddings for privacy-preserving analysis |
 | **Watcher** | A background service that captures specific types of activity data |
 | **Event Gateway** | Central API endpoint that receives and authenticates all capture events |
@@ -1111,6 +1332,9 @@ graph LR
 | **Token** | Unit of AI API usage (input/output) tracked for cost analysis |
 | **Embedding** | High-dimensional vector representation of text or audio |
 | **Hypertable** | TimescaleDB table optimized for time-series data |
+| **Wu Xing (五行)** | Five Element Theory used for personality compatibility assessment |
+| **Ba Zi (八字)** | Four Pillars of Destiny system for optimal timing calculations |
+| **I Ching (易经)** | 64 hexagrams system integrated into decision-making matrices |
 
 ---
 
