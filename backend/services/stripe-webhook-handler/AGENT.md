@@ -1,14 +1,16 @@
 # AGENT Instructions
 
-- Criticality: 9/10
-- Purpose: Subscription management and billing
+- Criticality: 3/10
+- Purpose: Community donation tracking and supporter acknowledgments
 - Files:
   - src/main.rs
   - src/webhook.rs
-  - src/events/subscription.rs
-  - src/events/invoice.rs
+  - src/events/donation.rs
+  - src/events/community.rs
   - src/database.rs
-- Webhook events: subscription.created, subscription.updated, invoice.paid
-- Updates: users.tier, subscription_id, seats
-- Signature verification: Stripe webhook secret
-- Tier enforcement: Adjusts retention_days, integration_limits
+- Webhook events: donation events, community support tracking
+- Updates community supporter status and acknowledgments
+- No feature restrictions or tier enforcement
+- All users have universal access to all features
+
+**Note: This service is optional since all features are free. It exists only to acknowledge community supporters, not to gate features.**
