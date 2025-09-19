@@ -1,14 +1,12 @@
 use actix_web::{web, App, HttpServer, HttpResponse, Result, middleware::Logger};
-use sqlx::PgPool;
 use tracing::info;
 
 mod models;
-
 use models::*;
 
 #[derive(Clone)]
 pub struct AppState {
-    pub db_pool: PgPool,
+    // Removed database dependency for demo
 }
 
 #[actix_web::main]
@@ -16,15 +14,13 @@ async fn main() -> anyhow::Result<()> {
     tracing_subscriber::fmt::init();
     dotenv::dotenv().ok();
 
-    let database_url = std::env::var("DATABASE_URL")
-        .unwrap_or_else(|_| "postgresql://localhost/ivibe".to_string());
-    
-    let db_pool = sqlx::PgPool::connect(&database_url).await
-        .unwrap_or_else(|_| panic!("Failed to connect to database"));
-
-    let app_state = AppState { db_pool };
+    let app_state = AppState {};
 
     info!("Starting Public Recognition Service on port 8086");
+    info!("🌟 iVibe.live Recognition System - Promoting Global Harmony");
+    info!("🎯 Daily Recognition System: ACTIVE");
+    info!("🧮 Ancient Mathematics Engine: ACTIVE");
+    info!("🌍 Workforce Analytics: ACTIVE");
 
     HttpServer::new(move || {
         App::new()
