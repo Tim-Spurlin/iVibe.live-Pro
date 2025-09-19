@@ -10,6 +10,7 @@ members = [
     "services/summarizer-job",
     "services/etl-orchestrator",
     "services/public-profile-api",
+    "services/public-recognition-service",
     "services/stripe-webhook-handler",
     "intelligence/emotion-detection",
     "intelligence/vibe-social-engine",

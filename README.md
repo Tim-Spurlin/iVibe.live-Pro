@@ -108,42 +108,48 @@ mindmap
 
 ## ✨ Core Features
 
-### Advanced Mathematical Scheduling Engine
+## 🎯 Daily Public Recognition System
 
-iVibe.live employs sophisticated algorithms derived from **ancient Chinese mathematics** and astronomical calculations, refined over thousands of years for predictive accuracy. Our scheduling system processes millions of data points to create optimal social harmony and eliminate social anxieties.
+### Global Harmony Through Strategic Recognition
 
-#### 🧮 Mathematical Foundation
+iVibe.live now features an **advanced daily recognition system** designed to promote global peace, unity, and harmony across all nations. This sophisticated system uses mathematical algorithms and workforce analytics to ensure optimal timing and maximum positive impact.
 
-The core scheduling algorithm uses the **Celestial Harmony Formula** (天和公式):
+### 🌅 Recognition Schedule
 
-```
-VibeScore(A,B) = Σ(i=1 to n) [w_i × (E_i × I_i × T_i × L_i)] × ψ(t) × ζ(φ,λ)
+| Day | Recognition Type | Scope | Algorithm Focus |
+|-----|------------------|-------|-----------------|
+| **Monday-Thursday** | Local Daily | One person per city | Workforce needs alignment, local industry gaps |
+| **Friday** | State/Province Weekly | One person per state | Regional talent development, cross-state inspiration |
+| **Saturday** | Country Weekly | One person per country | National unity, cultural celebration |
+| **Sunday** | Global Diversity | Cross-cultural recognition | International harmony, diversity promotion |
 
-Where:
-- E_i = Emotional compatibility vector (384-dimensional)
-- I_i = Interest alignment coefficient (0.0-1.0)
-- T_i = Temporal synchronicity factor
-- L_i = Location-based harmony index
-- w_i = Wisdom differential weight (Elder/Grasshopper pairing)
-- ψ(t) = Time-based astrological amplifier
-- ζ(φ,λ) = Geographic coordinate modifier
-- n = Total observable interaction vectors
-```
+### 🧮 Advanced Mathematical Engine
 
-#### 🎯 Trajectory Determination Matrix
+Our recognition system employs sophisticated algorithms including:
 
-Our **Multi-Dimensional Outcome Prediction System** weighs millions of potential scenarios:
+- **Celestial Harmony Formula (天和公式)**: Ancient Chinese mathematics for optimal timing
+- **Workforce Alignment Matrix**: Real-time industry analysis for career-relevant recognition
+- **Timezone Intelligence**: Seamless global posting aligned with local optimal engagement times
+- **Fibonacci Spiral Harmony**: Natural pattern alignment for maximum positive resonance
+- **Golden Ratio Optimization**: Mathematical perfection in scheduling and content delivery
 
-```
-OutcomeMatrix = ∮∮∮ [H(x,y,z,t) × P(success|context)] dxdydzdt
+### 🏭 Real-Time Workforce Analytics
 
-Where H represents the harmony field in 4D spacetime:
-H(x,y,z,t) = Σ(k) α_k × exp(-β_k × ||r-r_k||²) × cos(ω_k × t + φ_k)
+The system continuously analyzes:
+- **Employment statistics** by industry and city with expanding radius calculations
+- **Labor shortage detection** using predictive algorithms
+- **Career guidance matching** - recognition events align with local job market needs
+- **Industry oversaturation filtering** - achievements in oversupplied fields are intelligently filtered
+- **Growth sector identification** using trend analysis and economic indicators
 
-Separating hypothetical from real outcomes:
-R_real = ∫ P(observed) × W(validation) dt
-R_hypothetical = ∫ P(predicted) × U(uncertainty) dt
-```
+### 🕐 Optimal Timing Engine
+
+Every recognition post is timed for **maximum positive engagement**:
+- **Circadian rhythm alignment** for peak human receptivity
+- **Cultural sensitivity** - automatic avoidance of prayer times, meal times, and cultural events
+- **Timezone synchronization** - posts appear at the perfect local time for each region
+- **Engagement probability prediction** using machine learning on historical data
+- **Harmony amplification** - timing that promotes peace and reduces social tension
 
 ### Feature Matrix
 
@@ -641,43 +647,49 @@ graph LR
 
 ---
 
-## 💰 Pricing Plans
+## 🌟 Completely Free Platform
 
-### Subscription Tiers
+### Universal Access for Global Harmony
 
-| Plan | Monthly | Annual (per month) | Users | Best For |
-|------|---------|-------------------|-------|----------|
-| **Free** | $0 | $0 | Individual | Trying iVibe, basic tracking |
-| **Essential** | $4.50 | $4.00 | Individual | Professionals, AI tracking |
-| **Elite** | $10.00 | $8.00 | Individual | Power users, all features |
-| **Team** | $15.50/user | $13.50/user | 2-50 | Small teams, shared insights |
-| **Business** | $18.25/user | $16.25/user | 50+ | Enterprise, compliance tools |
+**iVibe.live is 100% FREE for everyone, forever.** Our mission is to foster global peace, unity, and harmony for all humanity - not to profit from human connection. 
 
-### Feature Comparison
+### All Features Included
 
-| Feature | Free | Essential | Elite | Team | Business |
-|---------|------|-----------|-------|------|----------|
-| **Dashboard History** | 1 week | 2 weeks | Unlimited | 365 days | Unlimited |
-| **Email Reports** | Weekly | Daily + Weekly | All | All | All |
-| **Programming Goals** | 1 | 3 | Unlimited | Unlimited | Unlimited |
-| **Leaderboard Type** | Public | Private | Private | Private | Private |
-| **Leaderboard Size** | Unlimited | 5 users | 50 users | 100 users | 1000 users |
-| **Core Integrations** | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **Custom Integrations** | ❌ | ❌ | ✅ | ✅ | ✅ |
-| **Mobile Features** | ❌ | ❌ | ✅ | ✅ | ✅ |
-| **Audio Intelligence** | ❌ | ❌ | ✅ | ✅ | ✅ |
-| **Team Dashboards** | ❌ | ❌ | ❌ | ✅ | ✅ |
-| **SSO Support** | ❌ | ❌ | ❌ | ❌ | ✅ |
-| **Support Level** | Community | Email | Priority Chat | Priority | Dedicated |
+Every user has access to **ALL** features:
 
-### Data Retention Matrix
+| Feature Category | What's Included |
+|------------------|-----------------|
+| **📊 Activity Tracking** | Complete desktop, terminal, browser, and mobile monitoring |
+| **🧠 AI Integration** | Unlimited token tracking, cost analysis, all AI providers |
+| **📱 Mobile Suite** | Full app usage, location intelligence, emotion analytics |
+| **🤝 Social Harmony** | Advanced Vibe scoring, proximity detection, Elder mentorship |
+| **📈 Analytics** | Unlimited dashboard history, all reports, complete exports |
+| **🏢 Team Features** | Organization dashboards, unlimited users, complete collaboration |
+| **🔌 Integrations** | 100+ IDE/editor plugins, all external services, custom SDK |
+| **🎯 Daily Recognition** | AI-powered daily public recognition system |
+| **🌍 Global Workforce Analytics** | Real-time industry statistics by city/region |
+| **⚖️ Career Harmony Matching** | Sophisticated algorithms matching recognition to job market needs |
+| **🕐 Optimal Timing Engine** | Ancient mathematics-based scheduling for maximum positive impact |
+| **🌅 Timezone Intelligence** | Seamless global recognition posting aligned with local time zones |
 
-| Data Type | Free | Essential | Elite | Team | Business |
-|-----------|------|-----------|-------|------|----------|
-| **Raw Events** | 7 days | 14 days | Infinite | 365 days | Policy-driven |
-| **Summaries** | 90 days | 180 days | Infinite | Infinite | Infinite |
-| **Audio Objects** | 30 days | 90 days | 365 days | Configurable | Configurable |
-| **Embeddings** | 90 days | 180 days | Infinite | Infinite | Infinite |
+### Donation-Supported Model
+
+While **completely free to use**, donations help us:
+- Maintain servers and infrastructure
+- Fund development of new harmony features
+- Support our mission of global peace and unity
+- Expand to underserved communities worldwide
+
+**Donations are helpful but never necessary.** Every human deserves access to tools that promote harmony and reduce social isolation.
+
+### Data Retention - No Limits
+
+All users enjoy:
+- **Unlimited** raw event history
+- **Unlimited** AI summaries and insights  
+- **Unlimited** embeddings and analysis
+- **Configurable** audio object retention
+- **Complete** data export capabilities
 
 ---
 
