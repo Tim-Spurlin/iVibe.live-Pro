@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>iVibe.live — Genuine social connection</title>
+    <meta name="description" content="iVibe.live is a modern social experience focused on real connection, privacy, and positive growth." />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header" id="top">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="#top" aria-label="iVibe home">
+          <img src="./assets/logo.svg" alt="" width="28" height="28" />
+          <span>iVibe.live</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Toggle menu">☰</button>
+        <ul class="nav-links" id="site-menu">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#stats">Stats</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section id="hero" class="section hero reveal">
+        <p class="eyebrow">Privacy-first social intelligence</p>
+        <h1>Connection over algorithms.</h1>
+        <p class="lead">No dimming background pulses, no falling distractions — just clear, premium storytelling with meaningful product focus.</p>
+        <a class="button" href="#projects">Explore platform modules</a>
+      </section>
+
+      <section id="about" class="section reveal">
+        <h2>Story</h2>
+        <details open>
+          <summary>Chapter 1 — Why iVibe exists</summary>
+          <p>iVibe.live was created to replace shallow engagement loops with real-world proximity, consent-aware data practices, and relationship-building features.</p>
+        </details>
+        <details>
+          <summary>Chapter 2 — How it feels</summary>
+          <p>A calm dark-purple visual system with subtle glow, readable typography, and intentional motion that respects reduced-motion preferences.</p>
+        </details>
+      </section>
+
+      <section id="projects" class="section reveal">
+        <h2>Core Modules</h2>
+        <div class="cards">
+          <article class="card"><h3>Event Gateway</h3><p>Secure event intake with tenant-aware processing.</p></article>
+          <article class="card"><h3>Vectoriser</h3><p>Transforms activity data into searchable semantic embeddings.</p></article>
+          <article class="card"><h3>Vibe Social Engine</h3><p>Proximity-based matching for authentic connections.</p></article>
+        </div>
+      </section>
+
+      <section id="stats" class="section reveal">
+        <h2>Contributions & Impact</h2>
+        <div class="stats-grid">
+          <div><span class="counter" data-target="100">0</span><p>Integrations</p></div>
+          <div><span class="counter" data-target="24">0</span><p>Hour insight window</p></div>
+          <div><span class="counter" data-target="1000">0</span><p>Vibe score range</p></div>
+        </div>
+      </section>
+
+      <section id="skills" class="section reveal">
+        <h2>Skills</h2>
+        <ul class="pill-list">
+          <li>Rust</li><li>TypeScript</li><li>Kotlin</li><li>PostgreSQL</li><li>Grafana</li><li>Privacy Engineering</li>
+        </ul>
+      </section>
+
+      <section id="contact" class="section reveal">
+        <h2>Contact</h2>
+        <p>Want to collaborate or deploy iVibe for your team?</p>
+        <a class="button" href="mailto:hello@ivibe.live">hello@ivibe.live</a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> iVibe.live</p>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

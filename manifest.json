@@ -1,0 +1,15 @@
+{
+  "name": "iVibe.live",
+  "short_name": "iVibe",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0f0b24",
+  "theme_color": "#1d1440",
+  "icons": [
+    {
+      "src": "./assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
