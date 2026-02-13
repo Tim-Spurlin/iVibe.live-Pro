@@ -18,6 +18,30 @@
 
 ---
 
+## 🌐 GitHub Pages Deployment (Static Website)
+
+This repository now includes a static website entry at the repository root for GitHub Pages:
+
+- `./index.html`
+- `./styles.css`
+- `./script.js`
+- `./404.html`
+- `./manifest.json`
+- `./assets/logo.svg`
+- `./assets/icon.svg`
+
+### Deploy Steps
+
+1. Push the default branch to GitHub.
+2. In GitHub, open **Settings → Pages**.
+3. Under **Build and deployment**, choose **Deploy from a branch**.
+4. Select your default branch and the `/ (root)` folder.
+5. Save and wait for Pages to publish.
+
+All website asset paths are relative (`./...`) to support project subpath hosting (`https://USERNAME.github.io/REPO/`).
+
+---
+
 ## 📑 Table of Contents
 
 - [🎯 Executive Summary](#-executive-summary)
